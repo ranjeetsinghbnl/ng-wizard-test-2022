@@ -1,0 +1,99 @@
+<section class="body-font relative">
+  <div class=" px-5 pt-24 mx-auto">
+    <div class="flex flex-col text-center w-full">
+      <h1 class="text-7xl mb-6 text-gray-900">Tell us about yourself</h1>
+
+    </div>
+    <div class="form_wrapper lg:w-1/2 md:w-2/3 mx-auto">
+      <form class="flex flex-col items-center" [formGroup]="premiumForm" (ngSubmit)="buyPremium()">
+        <div class="p-2 w-1/2">
+          <div class="relative">
+            <label for="userName" class="leading-7 text-sm">Name</label>
+            <input
+              type="text" name="userName" id="userName" placeholder="Add text" formControlName="userName"
+              class="w-full rounded border-2 border-gray-300 focus:border-gray-500  text-base outline-none text-gray-700 py-1 px-3 leading-8 "
+              required />
+            <div ngClass="text-red-600 "
+              *ngIf="formControl.userName.invalid && (formControl.userName.dirty || formControl.userName.touched)"
+              class="alert alert-danger">
+              <div *ngIf="formControl.userName.errors?.['required']">
+                Name is required.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-2 w-1/2">
+          <div class="relative">
+            <label for="userAge" class="leading-7 text-sm">Age</label>
+            <input 
+              class="w-full bg-opacity-50 rounded border-2 border-gray-300 focus:border-gray-500  text-base outline-none text-gray-700 py-1 px-3 leading-8 "
+              type="number" min="1" name="userAge" id="userAge" placeholder="Add Age" formControlName="userAge"
+              required />
+            <div ngClass="text-red-600"
+              *ngIf="formControl.userAge.invalid && (formControl.userAge.dirty || formControl.userAge.touched)"
+              class="alert alert-danger">
+              <div *ngIf="formControl.userAge.errors?.['required']">
+                Age is required.
+              </div>
+              <div *ngIf="formControl.userAge.errors?.['min']">
+                Minimum Age is 1.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-2 w-1/2">
+          <div class="relative">
+            <label class="leading-7 text-sm" for="country">Where do you live</label>
+            <select
+              class="w-full bg-opacity-50 rounded border-2 py-2 border-gray-300 focus:border-gray-500 text-base outline-none text-gray-700  px-2 leading-8 "
+              name="country" id="country" formControlName="country" required>
+              <option [value]="country.code" *ngFor="let country of countries">{{country.name}}</option>
+            </select>
+            <div *ngIf="formControl.country.invalid && (formControl.country.dirty || formControl.country.touched)"
+              class="alert alert-danger">
+              <div *ngIf="formControl.country.errors?.['required']">
+                Please choose place where you live.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="p-5 mt-6 w-full bg-gray-50 flex flex-col items-center">
+          <div class="relative">
+            <ul>
+              <li *ngFor="let plan of premiumPlans" class="mb-3">
+                <!-- <input class="mx-2 my-4" type="radio" [value]="plan.id" formControlName="plan" name="plan"
+                  required>{{plan.name}} -->
+                  <input type="radio" id="plan_{{plan.id}}" [value]="plan.id" formControlName="plan" name="plan" class="form-radio">
+                  <label for="plan_{{plan.id}}" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{plan.name}}</label>
+                <ng-container *ngIf="plan.id === 1; else otherPlans">
+                  ({{ calculatePlanPremium(plan.id) }}{{formControl.country.value}})
+                </ng-container>
+                <ng-template #otherPlans>
+                  (+{{ calculatePlanPremium(plan.id) }}{{formControl.country.value}}, {{plan.rate_v*100}}%)
+                </ng-template>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-2 w-full h-screen  bg-gray-50">
+          <div class="relative flex flex-col items-center justify-center">
+
+            <h1 class="my-8 sm:text-3xl text-2xl font-medium title-font  text-gray-900"
+              *ngIf="formControl.userAge.valid && formControl.country.valid">Your premium is:
+              {{calculateTotalPremium()}}{{formControl.country.value}}</h1>
+            <div class="my-8 flex w-1/2 justify-center ">
+              <a [routerLink]="ROUTE_URL['GetStart']">
+                <button type="button"
+                  class="text-gray-900 mx-3  bg-white border-2 border-gray-300 focus:outline-none hover:bg-gray-100  font-medium rounded-md px-10 py-2.5 ">Back</button>
+              </a>
+              <button class="text-white mx-3 bg-gray-900  font-medium rounded-md  px-10 py-2.5  " aria-label="Next"
+                type="submit" [disabled]="!premiumForm.valid"
+                [ngClass]="{'bg-gray-600': !premiumForm.valid}">Next</button>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
