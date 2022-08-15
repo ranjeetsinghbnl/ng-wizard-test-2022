@@ -57,11 +57,11 @@ Page 2
 
     -   Based on the selected country, premium will be adjusted accordingly based on the rate `10 * Age * Rate`
 
-| **Currency Code**  | **Rate** | **Example** |   |   |
-|---------------|------|---------|---|---|
-| HKD           | 1    | 100HKD  |   |   |
-| USD           | 2    | 200USD  |   |   |
-| AUD           | 3    | 300AUD  |   |   |
+| **Currency Code**  | **Rate** | **Example** |
+|---------------|------|---------|
+| HKD           | 1    | 100HKD  |
+| USD           | 2    | 200USD  |
+| AUD           | 3    | 300AUD  |
 
 -   Based on the selected `Package`, premium will be adjusted accordingly, see `Package` options
 
