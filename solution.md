@@ -13,6 +13,7 @@ This is a solution I have designed for Covergo home test. The specification and 
 
 ## Tech Stack ⚙️
 - Angular - 14
+- TypeScript
 - Prettier, Unit test(jasmine)
 - Husky
 - Linting
