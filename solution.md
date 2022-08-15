@@ -91,6 +91,7 @@ Responsible for making applications look great. I have defined the tailwind base
 - Google analytics events tags with tag manager to track the behavior. 
 - Save user filled data, when the user clicks on the back button from the premium summary page to track the activities.
 - API for fetching all the details dynamically.
+- ADD CI/CD
 
 
 ## Getting Started 🚀
